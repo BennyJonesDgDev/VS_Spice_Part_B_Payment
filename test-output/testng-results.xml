@@ -2,27 +2,22 @@
 <testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-03-27T06:45:00Z" name="Default suite" finished-at="2024-03-27T06:45:00Z" duration-ms="96">
+  <suite started-at="2024-03-27T06:47:33Z" name="Default suite" finished-at="2024-03-27T06:49:25Z" duration-ms="112145">
     <groups>
     </groups>
-    <test started-at="2024-03-27T06:45:00Z" name="Default test" finished-at="2024-03-27T06:45:00Z" duration-ms="96">
+    <test started-at="2024-03-27T06:47:33Z" name="Default test" finished-at="2024-03-27T06:49:25Z" duration-ms="112145">
       <class name="SpicePart_A.spicePartB_Payment">
-        <test-method signature="run()[pri:0, instance:SpicePart_A.spicePartB_Payment@5d12a356]" started-at="2024-03-26T23:45:00Z" name="run" finished-at="2024-03-26T23:45:00Z" duration-ms="77" status="FAIL">
-          <exception class="java.lang.IllegalStateException">
+        <test-method signature="run()[pri:0, instance:SpicePart_A.spicePartB_Payment@5d12a356]" started-at="2024-03-26T23:47:33Z" name="run" finished-at="2024-03-26T23:49:25Z" duration-ms="112128" status="FAIL">
+          <exception class="org.sikuli.script.FindFailed">
             <message>
-              <![CDATA[The driver executable does not exist: D:\chromedriver.exe]]>
+              <![CDATA[\\14.140.167.188\Vakilsearch\Automation_Documents\Add_extension.png: (132x49) in R[0,0 1920x1080]@S(0)]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.IllegalStateException: The driver executable does not exist: D:\chromedriver.exe
-	at com.google.common.base.Preconditions.checkState(Preconditions.java:585)
-	at org.openqa.selenium.remote.service.DriverService.checkExecutable(DriverService.java:136)
-	at org.openqa.selenium.remote.service.DriverService.findExecutable(DriverService.java:131)
-	at org.openqa.selenium.chrome.ChromeDriverService.access$000(ChromeDriverService.java:33)
-	at org.openqa.selenium.chrome.ChromeDriverService$Builder.findDefaultExecutable(ChromeDriverService.java:139)
-	at org.openqa.selenium.remote.service.DriverService$Builder.build(DriverService.java:335)
-	at org.openqa.selenium.chrome.ChromeDriverService.createDefaultService(ChromeDriverService.java:89)
-	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:123)
-	at SpicePart_A.spicePartB_Payment.run(spicePartB_Payment.java:68)
+              <![CDATA[FindFailed: \\14.140.167.188\Vakilsearch\Automation_Documents\Add_extension.png: (132x49) in R[0,0 1920x1080]@S(0)
+  Line 2226, in file Region.java
+
+	at org.sikuli.script.Region.wait(Region.java:2226)
+	at SpicePart_A.spicePartB_Payment.run(spicePartB_Payment.java:82)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -50,7 +45,7 @@
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.IllegalStateException -->
+          </exception> <!-- org.sikuli.script.FindFailed -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- run -->
