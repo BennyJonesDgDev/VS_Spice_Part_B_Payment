@@ -64,7 +64,8 @@ public class spicePartB_Payment {
 	public void run() throws InterruptedException, FindFailed {
 
 
-	System.setProperty("webdriver.chrome.driver", "D:\\chromedriver.exe");
+//	System.setProperty("webdriver.chrome.driver", "D:\\chromedriver.exe");
+	WebDriverManager.chromedriver().setup();
 	WebDriver driver = new ChromeDriver();
 	
 	driver.get(

@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Tue Mar 26 13:26:28 IST 2024</td>
+<td>Started on:</td><td>Tue Mar 26 23:45:00 PDT 2024</td>
 </tr>
-<tr><td>Total time:</td><td>4 seconds (4146 ms)</td>
+<tr><td>Total time:</td><td>0 seconds (96 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -76,27 +76,20 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='SpicePart_A.spicePartB_Payment.run()'><b>run</b><br>Test class: SpicePart_A.spicePartB_Payment</td>
-<td><div><pre>java.lang.UnsatisfiedLinkError: C:\Users\Admin\AppData\Local\Temp\tmplib\Win32Util.dll: Can&apos;t load IA 32-bit .dll on a AMD 64-bit platform
-	at java.base/jdk.internal.loader.NativeLibraries.load(Native Method)
-	at java.base/jdk.internal.loader.NativeLibraries$NativeLibraryImpl.open(NativeLibraries.java:331)
-	at java.base/jdk.internal.loader.NativeLibraries.loadLibrary(NativeLibraries.java:197)
-	at java.base/jdk.internal.loader.NativeLibraries.loadLibrary(NativeLibraries.java:139)
-	at java.base/java.lang.ClassLoader.loadLibrary(ClassLoader.java:2418)
-	at java.base/java.lang.Runtime.load0(Runtime.java:852)
-	at java.base/java.lang.System.load(System.java:2025)
-	at com.wapmx.nativeutils.jniloader.NativeLoader.loadLibrary(NativeLoader.java:44)
-	at org.sikuli.script.Win32Util.&lt;clinit&gt;(Win32Util.java:19)
-	at java.base/java.lang.Class.forName0(Native Method)
-	at java.base/java.lang.Class.forName(Class.java:421)
-	at java.base/java.lang.Class.forName(Class.java:412)
-	at org.sikuli.script.Env.getOSUtil(Env.java:91)
-	at org.sikuli.script.ScreenHighlighter.init(ScreenHighlighter.java:180)
-	at org.sikuli.script.ScreenHighlighter.&lt;init&gt;(ScreenHighlighter.java:293)
-	at org.sikuli.script.Screen.initBounds(Screen.java:105)
-	at org.sikuli.script.Screen.&lt;init&gt;(Screen.java:117)
-	at SpicePart_A.spicePartB_Payment.run(spicePartB_Payment.java:75)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+<td><div><pre>java.lang.IllegalStateException: The driver executable does not exist: D:\chromedriver.exe
+	at com.google.common.base.Preconditions.checkState(Preconditions.java:585)
+	at org.openqa.selenium.remote.service.DriverService.checkExecutable(DriverService.java:136)
+	at org.openqa.selenium.remote.service.DriverService.findExecutable(DriverService.java:131)
+	at org.openqa.selenium.chrome.ChromeDriverService.access$000(ChromeDriverService.java:33)
+	at org.openqa.selenium.chrome.ChromeDriverService$Builder.findDefaultExecutable(ChromeDriverService.java:139)
+	at org.openqa.selenium.remote.service.DriverService$Builder.build(DriverService.java:335)
+	at org.openqa.selenium.chrome.ChromeDriverService.createDefaultService(ChromeDriverService.java:89)
+	at org.openqa.selenium.chrome.ChromeDriver.&lt;init&gt;(ChromeDriver.java:123)
+	at SpicePart_A.spicePartB_Payment.run(spicePartB_Payment.java:68)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
 	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
 	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
@@ -118,28 +111,21 @@ function toggleAllBoxes() {
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1700078557", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1700078557'><pre>java.lang.UnsatisfiedLinkError: C:\Users\Admin\AppData\Local\Temp\tmplib\Win32Util.dll: Can&apos;t load IA 32-bit .dll on a AMD 64-bit platform
-	at java.base/jdk.internal.loader.NativeLibraries.load(Native Method)
-	at java.base/jdk.internal.loader.NativeLibraries$NativeLibraryImpl.open(NativeLibraries.java:331)
-	at java.base/jdk.internal.loader.NativeLibraries.loadLibrary(NativeLibraries.java:197)
-	at java.base/jdk.internal.loader.NativeLibraries.loadLibrary(NativeLibraries.java:139)
-	at java.base/java.lang.ClassLoader.loadLibrary(ClassLoader.java:2418)
-	at java.base/java.lang.Runtime.load0(Runtime.java:852)
-	at java.base/java.lang.System.load(System.java:2025)
-	at com.wapmx.nativeutils.jniloader.NativeLoader.loadLibrary(NativeLoader.java:44)
-	at org.sikuli.script.Win32Util.&lt;clinit&gt;(Win32Util.java:19)
-	at java.base/java.lang.Class.forName0(Native Method)
-	at java.base/java.lang.Class.forName(Class.java:421)
-	at java.base/java.lang.Class.forName(Class.java:412)
-	at org.sikuli.script.Env.getOSUtil(Env.java:91)
-	at org.sikuli.script.ScreenHighlighter.init(ScreenHighlighter.java:180)
-	at org.sikuli.script.ScreenHighlighter.&lt;init&gt;(ScreenHighlighter.java:293)
-	at org.sikuli.script.Screen.initBounds(Screen.java:105)
-	at org.sikuli.script.Screen.&lt;init&gt;(Screen.java:117)
-	at SpicePart_A.spicePartB_Payment.run(spicePartB_Payment.java:75)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1561745898", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1561745898'><pre>java.lang.IllegalStateException: The driver executable does not exist: D:\chromedriver.exe
+	at com.google.common.base.Preconditions.checkState(Preconditions.java:585)
+	at org.openqa.selenium.remote.service.DriverService.checkExecutable(DriverService.java:136)
+	at org.openqa.selenium.remote.service.DriverService.findExecutable(DriverService.java:131)
+	at org.openqa.selenium.chrome.ChromeDriverService.access$000(ChromeDriverService.java:33)
+	at org.openqa.selenium.chrome.ChromeDriverService$Builder.findDefaultExecutable(ChromeDriverService.java:139)
+	at org.openqa.selenium.remote.service.DriverService$Builder.build(DriverService.java:335)
+	at org.openqa.selenium.chrome.ChromeDriverService.createDefaultService(ChromeDriverService.java:89)
+	at org.openqa.selenium.chrome.ChromeDriver.&lt;init&gt;(ChromeDriver.java:123)
+	at SpicePart_A.spicePartB_Payment.run(spicePartB_Payment.java:68)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
 	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
 	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
@@ -162,8 +148,8 @@ function toggleAllBoxes() {
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 </pre></div></td>
-<td>4</td>
-<td>SpicePart_A.spicePartB_Payment@2631f68c</td></tr>
+<td>0</td>
+<td>SpicePart_A.spicePartB_Payment@5d12a356</td></tr>
 </table><p>
 </body>
 </html>
