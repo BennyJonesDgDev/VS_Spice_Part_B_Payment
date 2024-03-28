@@ -9,7 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DateFormat;
@@ -38,8 +37,6 @@ import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
-
-import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
@@ -92,16 +89,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.w3c.dom.CharacterData;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
@@ -616,34 +608,7 @@ public class CommonFunctions {
 		return noOfMenus;
 	}
 
-	public String getTextBoxValue(final WebDriver driver, String fieldName) throws IOException {
-		String targetElement = null;
-		WebDriverWait wait = new WebDriverWait(driver, 1);
-		try {
-			waitUntilElementPresent(driver, By.xpath("//*[text()='" + fieldName + "']/following::input[1]"));
-			List<WebElement> resultResources = driver
-					.findElements(By.xpath("//*[text()='" + fieldName + "']/following::input[1]"));
-			Iterator<WebElement> calIterator = resultResources.iterator();
-			while (calIterator.hasNext()) {
-				WebElement eachElements = calIterator.next();
-				if (eachElements.isDisplayed()) {
 
-					wait.until(new ExpectedCondition<Boolean>() {
-						public Boolean apply(WebDriver driver) {
-							return eachElements.getAttribute("value").length() != 0;
-						}
-					});
-
-					targetElement = eachElements.getAttribute("value").trim();
-					break;
-				}
-			}
-		} catch (Exception e) {
-			logger.error("The entire test cases failed since, the expected element " + fieldName
-					+ " does not seems to available " + driver.getCurrentUrl() + "\n");
-		}
-		return targetElement;
-	}
 
 	public String getTextBoxValueByXpath(final WebDriver driver, String xpath) throws IOException {
 		String targetElement = null;
