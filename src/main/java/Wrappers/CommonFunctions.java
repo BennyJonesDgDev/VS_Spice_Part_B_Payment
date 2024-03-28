@@ -4,7 +4,6 @@ import java.awt.AWTException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,9 +12,6 @@ import java.io.OutputStreamWriter;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -76,13 +72,11 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -91,7 +85,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.CapabilityType.ForSeleniumServer;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.SessionId;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -104,6 +97,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -119,9 +113,7 @@ public class CommonFunctions {
 //	private static final ObjectMapper mapper = new ObjectMapper();
 	public WebDriver driver;
 	public ArrayList<String> ManualActionsMessage = new ArrayList<String>();
-	private ThreadLocal<UnexpectedAlertBehaviour> alertCapability = ThreadLocal
-			.withInitial(() -> UnexpectedAlertBehaviour.ACCEPT);
-
+	
 	private ThreadLocal<UnexpectedAlertBehaviour> currentAlertCapability = ThreadLocal
 			.withInitial(() -> UnexpectedAlertBehaviour.ACCEPT);
 
@@ -3466,50 +3458,7 @@ public class CommonFunctions {
 		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 	}
 
-	public DesiredCapabilities getChromeDesiredCapabilities(String automationMode) {
-		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-		capabilities.setCapability("chrome.switches", Arrays.asList("--ignore-certificate-errors"));
-
-		// Added to avoid yellow warning in chrome 35
-		ChromeOptions options = new ChromeOptions();
-		// options.addArguments("test-type");
-		// For view pdf in chrome
-		capabilities.setCapability("chrome.switches",
-				Arrays.asList("--start-maximized", "--ignore-certificate-errors", "--ignore-ssl-errors=true",
-						"--disable-popup-blocking", "--disable-default-apps", "--auto-launch-at-startup",
-						"--always-authorize-plugins"));
-		options.addArguments("test-type");
-		options.addArguments("--no-sandbox");
-		options.addArguments("--ignore-certificate-errors");
-		options.addArguments("--start-maximized");
-		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-		chromePrefs.put("profile.default_content_settings.popups", 0);
-		chromePrefs.put("download.default_directory", "C:\\Users\\Admin\\Downloads");
-		chromePrefs.put("download.prompt_for_download", "false");
-		options.setExperimentalOption("prefs", chromePrefs);
-		options.addArguments("--test-type");
-		// chromePrefs.put("profile.default_content_settings.popups", 0);
-		options.setExperimentalOption("prefs", chromePrefs);
-
-		if (automationMode.equals("headless")) {
-			options.addArguments("headless");
-		}
-		capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-		capabilities.setCapability(ForSeleniumServer.PROXYING_EVERYTHING, true);
-		capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-		capabilities.setCapability(CapabilityType.SUPPORTS_ALERTS, true);
-		capabilities.setCapability(CapabilityType.SUPPORTS_JAVASCRIPT, true);
-		capabilities.setPlatform(Platform.WINDOWS);
-		capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-		setAlertBehaviorCapabilities(capabilities);
-		// setLoggingPrefs(capabilities);
-		// setProxy(capabilities);
-		options.setCapability("security.default_personal_cert", "Select Automatically");
-		options.merge(capabilities);
-
-		return capabilities;
-	}
-
+	
 	public DesiredCapabilities getFireFoxDesiredCapabilities(String downloadPath) {
 		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 		FirefoxProfile firefoxProfile = new FirefoxProfile();
@@ -3628,11 +3577,7 @@ public class CommonFunctions {
 		return capabilities;
 	}
 
-	public void setAlertBehaviorCapabilities(DesiredCapabilities capabilities) {
-		capabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, alertCapability.get());
-		currentAlertCapability.set(alertCapability.get());
-	}
-
+	
 	public void zoomInZoomOut(final WebDriver driver, String value) throws AWTException {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("document.body.style.zoom=(" + value + ");");
