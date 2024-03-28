@@ -38,7 +38,7 @@ import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
-import javax.xml.parsers.DocumentBuilder;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.io.FileUtils;
@@ -114,8 +114,7 @@ public class CommonFunctions {
 	public WebDriver driver;
 	public ArrayList<String> ManualActionsMessage = new ArrayList<String>();
 	
-	private ThreadLocal<UnexpectedAlertBehaviour> currentAlertCapability = ThreadLocal
-			.withInitial(() -> UnexpectedAlertBehaviour.ACCEPT);
+
 
 	public void waitUntilElementPresent(final WebDriver driver, final By by) {
 		WebDriverWait wait = new WebDriverWait(driver, 5);
@@ -734,100 +733,6 @@ public class CommonFunctions {
 		return directorDINDetails;
 	}
 
-	public void getPanDetailsFromPDF(Map<String, String> dataMap, int j) throws IOException {
-		String dinNo = dataMap.get("DINNo " + j);
-		Map<String, String> directorPDFPanDetails = new HashMap<String, String>();
-		String str = null;
-		Response response = null;
-		String ticketId = dataMap.get("ticketId");
-		try {
-			OkHttpClient client = new OkHttpClient();
-			// Proxy proxyTest = new Proxy(Proxy.Type.HTTP,new
-			// InetSocketAddress("192.168.5.102", 57707));
-			// OkHttpClient.Builder builder = new OkHttpClient.Builder().proxy(proxyTest);
-			// OkHttpClient client = builder.build();
-			MediaType mediaType = MediaType.parse("text/xml");
-			RequestBody body = RequestBody.create(mediaType,
-					"<?xml version=\"1.0\" encoding=\"UTF-8\"?><soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">  "
-							+ " <soap:Body>     "
-							+ " <tns:getNCAPrefillDetails xmlns:tns=\"http://ncaprifill.org/wsdl\">     "
-							+ "    <NCAPrefillProcessorDTO>       " + "     <callID>DIN</callID>        "
-							+ "    <formID>ZI01</formID>       " + "     <input/>          " + "  <panPassport>" + dinNo
-							+ "</panPassport>     " + "       <sid>NCA</sid>     " + "    </NCAPrefillProcessorDTO>  "
-							+ "    </tns:getNCAPrefillDetails> " + "  </soap:Body></soap:Envelope>");
-			Request request = new Request.Builder().url("http://www.mca.gov.in/FOServicesWeb/NCAPrefillService")
-					.post(body).addHeader("Cache-Control", "no-cache").addHeader("Content-Type", "text/xml")
-					.addHeader("Postman-Token",
-							"d5478e35-44f2-44fe-8983-c34c833c6cfe,42cf42c0-03bd-4200-9188-79615a8fb0c9")
-					.addHeader("accept-encoding", "gzip, deflate").addHeader("cache-control", "no-cache").build();
-
-			response = client.newCall(request).execute();
-			str = response.body().string();
-
-			DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-			InputSource is = new InputSource();
-			is.setCharacterStream(new StringReader(str));
-
-			Document doc = db.parse(is);
-			NodeList nodes = doc.getElementsByTagName("return");
-
-			for (int i = 0; i < nodes.getLength(); i++) {
-				Element element = (Element) nodes.item(i);
-
-				NodeList panNo = element.getElementsByTagName("pan");
-				Element panNoLine = (Element) panNo.item(0);
-				directorPDFPanDetails.put("applicantPan " + (j), getCharacterDataFromElement(panNoLine));
-
-				NodeList dateOfBirth = element.getElementsByTagName("dateOfBirth");
-				Element dateOfBirthLine = (Element) dateOfBirth.item(0);
-				String[] dobs = getCharacterDataFromElement(dateOfBirthLine).split("T");
-				String expectedDate = convertDateFormat(dobs[0], "yyyy-MM-dd", "dd/MM/yyyy");
-				directorPDFPanDetails.put("applicantDOB " + (j), expectedDate);
-
-				NodeList aadharNo = element.getElementsByTagName("adhaar");
-				Element aadharNoLine = (Element) aadharNo.item(0);
-				directorPDFPanDetails.put("applicantaadharNo " + (j), getCharacterDataFromElement(aadharNoLine));
-
-				NodeList paddressLineOne = element.getElementsByTagName("paddressLineOne");
-				Element paddressLineOneLine = (Element) paddressLineOne.item(0);
-
-				directorPDFPanDetails.put("applicantAddressLine1 " + (j),
-						getCharacterDataFromElement(paddressLineOneLine));
-
-				NodeList paddressLineTwo = element.getElementsByTagName("paddressLineTwo");
-				Element paddressLineTwoLine = (Element) paddressLineTwo.item(0);
-
-				directorPDFPanDetails.put("applicantAddressLine2 " + (j),
-						getCharacterDataFromElement(paddressLineTwoLine));
-
-				NodeList cityOne = element.getElementsByTagName("cityOne");
-				Element cityOneLine = (Element) cityOne.item(0);
-				directorPDFPanDetails.put("applicantCity " + (j), getCharacterDataFromElement(cityOneLine));
-
-				NodeList state1 = element.getElementsByTagName("state1");
-				Element state1Line = (Element) state1.item(0);
-				directorPDFPanDetails.put("applicantState " + (j), getCharacterDataFromElement(state1Line));
-
-				NodeList country = element.getElementsByTagName("country");
-				Element countryLine = (Element) country.item(0);
-				directorPDFPanDetails.put("applicantCountry " + (j), getCharacterDataFromElement(countryLine));
-
-				NodeList postCodeOne = element.getElementsByTagName("postCodeOne");
-				Element postCodeOneLine = (Element) postCodeOne.item(0);
-				directorPDFPanDetails.put("applicantPincode " + (j), getCharacterDataFromElement(postCodeOneLine));
-			}
-			dataMap.putAll(directorPDFPanDetails);
-			dataMap.put("fetchPDFDetails", "Yes");
-			sortbykey(dataMap);
-			logger.info("For ticket #  " + ticketId + " Got DIN information using INC_Form1");
-		} catch (Exception e) {
-			logger.error(e);
-			dataMap.put("fetchPDFDetails", "No");
-		} finally {
-			response.body().close();
-			logger.info("For ticket #  " + ticketId + " Closed INC_Form1 API call successfully");
-		}
-	}
 
 	public String getCharacterDataFromElement(Element e) {
 		Node child = e.getFirstChild();
