@@ -1464,7 +1464,7 @@ public class spicePartB_PaymentDetails {
 					 collection.deleteOne(Filters.eq("ticketId", ticketId));
 			            System.out.println("Document deleted successfully...");
 					Logout(driver);
-				
+				 
 			} catch (Exception e) {
 
 				System.out.println(e);
